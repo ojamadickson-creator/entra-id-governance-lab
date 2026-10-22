@@ -4,7 +4,7 @@
   <strong>Cloud IAM Portfolio Project — Windows-free, cloud-only tenant lab</strong><br>
   Automated onboarding · Dynamic membership · Administrative Units · Privileged Identity Management ·<br>
   Enterprise app access · Access Reviews · Offboarding<br>
-  <em>Portfolio Project for IT Administrator Job Applications</em>
+  <em>Portfolio Project for IT Administrator </em>
 </p>
 
 ---
