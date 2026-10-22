@@ -79,6 +79,7 @@ Key behaviors to understand before running the phase scripts:
   scopes cause `403 Forbidden` mid-execution; over-broad scopes violate least privilege.
 - `Directory.ReadWrite.All` is **not** a blanket requirement — this guide avoids presenting it
   as the default. See [Get started with the Microsoft Graph PowerShell SDK](https://learn.microsoft.com/en-us/powershell/microsoftgraph/get-started).
+  You may need to disable your security default in Entra to run the above script
 
 ### 6. Prepare the CSV source file
 
