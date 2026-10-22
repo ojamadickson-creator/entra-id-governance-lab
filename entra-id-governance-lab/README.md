@@ -25,10 +25,7 @@ role mapped by least privilege rather than blanket admin rights. Every procedure
 was checked against official Microsoft Learn documentation before being written down, and each
 phase cites the sources that support it.
 
-> **Honesty note:** every step in this repository is **documentation-verified** against
-> Microsoft Learn, but the guide is written to be *executed* by you in your own (trial) tenant.
-> Nothing here claims to be a record of an already-completed run — capture your own evidence
-> using the guidance in each phase and in `assets/screenshots/README.md`.
+
 
 ## Lab Architecture
 
