@@ -18,16 +18,7 @@ status logging. Role assignment happens in Phases 3–4.
 - Delegated Graph scopes for this exercise: `User.ReadWrite.All`, `Group.ReadWrite.All`.
 - `data/contractors.csv` prepared and reviewed.
 
-## Design Decisions (and corrections to the source breakdown)
 
-| Decision | Rationale |
-|---|---|
-| Scopes requested per exercise | `Directory.ReadWrite.All` is not minimum privilege for user creation; missing scopes fail with HTTP 403 mid-run |
-| Delegated permissions via `Connect-MgGraph -Scopes` | Operates as the signed-in operator; consent is separate from your Entra role |
-| `ForceChangePasswordNextSignIn = $true` | Entra ID intercepts the first sign-in and mandates a password change |
-| Temporary passwords never logged | The script's report contains UPNs and status only — no secrets |
-| `Specialty` stays CSV-only | There is no standard Entra user property for it; it feeds the role-mapping logic later |
-| Static parent group, not dynamic | A dynamic group is not a container that prevents orphan users; the static group gives explicit, reviewable membership |
 
 ## Step-by-Step Execution
 
