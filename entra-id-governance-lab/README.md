@@ -144,29 +144,7 @@ Supporting documents: [Troubleshooting](docs/troubleshooting.md) ·
 [Validation Checklist](docs/validation-checklist.md) ·
 [References & Verification Ledger](docs/references.md)
 
-## Corrections Applied to the Source Breakdown
 
-The educational breakdown this guide was built from contained several claims that conflict with
-Microsoft's documented behavior. Each is corrected once, in the relevant phase:
-
-1. **Dynamic groups are not access-control containers** — a dynamic group does not prevent
-   "orphan" users, and access reviews **cannot remove members from dynamic groups** (decisions
-   don't change rule-driven membership). Phase 6 uses a static group for the removal exercise.
-2. **Security roles cannot be AU-scoped** — only a specific list of roles (Helpdesk, User, Groups
-   Administrators, etc.) supports administrative unit scope. Phase 3 keeps the security-role
-   examples tenant-scoped and explains the restriction.
-3. **MFA on PIM activation is once per session**, not a guaranteed fresh prompt at every
-   activation. Phase 4 documents the Conditional Access authentication-context option for
-   strict enforcement.
-4. **Offboarding order** — Microsoft's documented emergency sequence disables the account and
-   revokes sessions *early* (before/with entitlement removal), and `Revoke-MgUserSignInSession`
-   does not instantly terminate every application session. Phase 7 follows the documented order.
-5. **`ForceChangePasswordNextSignIn`** is the correct password-profile property name, and
-   temporary passwords must never be written to logs or screenshots.
-6. **The custom SOC-role permission is `signInReports`**, not `signInLogs` — the custom-role
-   permission lists publish `microsoft.directory/signInReports/allProperties/read`.
-7. **`Directory.ReadWrite.All` is not minimum privilege** for onboarding — scopes are requested
-   per exercise, and the guide separates Graph consent from the operator's Entra role.
 
 ## Script Quality Assurance
 
