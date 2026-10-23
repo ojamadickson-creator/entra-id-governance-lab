@@ -53,7 +53,7 @@ re-runs are safe and **repair missing group memberships** for users created earl
 > 'https://graph.microsoft.com/v1.0/directoryObjects/<object-id>' }`), per
 > [Add members (Microsoft Graph)](https://learn.microsoft.com/en-us/graph/api/group-post-members?view=graph-rest-1.0).
 
-###How to prepare the script in Azure
+### How to prepare the script in Azure
 Azure Cloud Shell includes a built-in Upload button and a file system, so you don't need any complex setup.
 
 Step 1: Upload the CSV File to Azure Cloud Shell
