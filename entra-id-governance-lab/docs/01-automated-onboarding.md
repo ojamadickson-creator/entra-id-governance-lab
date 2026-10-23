@@ -53,6 +53,34 @@ re-runs are safe and **repair missing group memberships** for users created earl
 > 'https://graph.microsoft.com/v1.0/directoryObjects/<object-id>' }`), per
 > [Add members (Microsoft Graph)](https://learn.microsoft.com/en-us/graph/api/group-post-members?view=graph-rest-1.0).
 
+###How to prepare the script in Azure
+Azure Cloud Shell includes a built-in Upload button and a file system, so you don't need any complex setup.
+
+Step 1: Upload the CSV File to Azure Cloud Shell
+On your local computer, create or save your contractors.csv file using Notepad or Excel.
+
+In your browser where Azure Cloud Shell is open, look at the top toolbar.
+
+Click the Upload/Download icon (it looks like an arrow pointing up and down).
+
+Click Upload.
+
+Select contractors.csv from your local machine.
+
+By default, the uploaded file will land in your root user folder inside Cloud Shell (/home/yourusername or C:\Users\CloudUser).
+The run these commands and move the file to match the path below in step three
+Step 1: Create the data folder
+```powershell
+New-Item -ItemType Directory -Path '.\data' -Force
+```
+Step 2: Move and Rename the uploaded file(make sure you use the path created during your upload)
+```powershell
+Move-Item -Path '/home/akpoga/contractors.sample.csv' -Destination '.\data\contractors.csv' -Force
+```
+```powershell
+Test-Path '.\data\contractors.csv'
+```
+
 ### 3. Run the bulk creation loop
 
 Run the prepared script:
