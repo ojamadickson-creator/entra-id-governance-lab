@@ -80,6 +80,31 @@ Move-Item -Path '/home/akpoga/contractors.sample.csv' -Destination '.\data\contr
 ```powershell
 Test-Path '.\data\contractors.csv'
 ```
+Create the scripts folder:
+```powershell
+New-Item -ItemType Directory -Path './scripts' -Force
+```
+Paste the script code directly using the built-in Editor
+Run this command to open the Azure Cloud Shell editor:
+```powershell
+code ./scripts/01-Bulk-Create-Contractors.ps1
+```
+A code editor window will pop up at the top. Paste your script code into the editor.
+
+Press Ctrl + S to save, then Ctrl + Q to close the editor window.
+Do the same for the rest
+```powershell
+code ./scripts/02-New-DynamicGroups.ps1
+```
+```powershell
+code ./scripts/03-New-AdminUnitScopedRole.ps1
+```
+```powershell
+code ./scripts/05-Assign-UsersToApp.ps1
+```
+```powershell
+code ./scripts/07-Offboard-User.ps1
+```
 
 ### 3. Run the bulk creation loop
 
