@@ -1,12 +1,16 @@
+
 # Microsoft Entra ID Governance Lab — Identity Lifecycle, PIM, and Access Reviews
 
-<p align="center">
-  <strong>Cloud IAM Portfolio Project — Windows-free, cloud-only tenant lab</strong><br>
-  Automated onboarding · Dynamic membership · Administrative Units · Privileged Identity Management ·<br>
-  Enterprise app access · Access Reviews · Offboarding<br>
-  <em>Portfolio Project for IT Administrator </em>
-</p>
+[![Tenant - Cloud-Only (Entra ID)](https://img.shields.io/badge/Tenant-Cloud--Only_(Entra_ID)-0078D4?style=flat&logo=microsoftazure&logoColor=white)](#)
+[![Automation - Microsoft Graph PowerShell](https://img.shields.io/badge/Automation-Graph_PowerShell-5391FE?style=flat&logo=powershell&logoColor=white)](#)
+[![Security - Least Privilege & PIM](https://img.shields.io/badge/Security-Least_Privilege_%26_PIM-2EA44F?style=flat&logo=shield&logoColor=white)](#)
+[![Focus - Cloud IAM Portfolio](https://img.shields.io/badge/Focus-Cloud_IAM_Portfolio-8A2BE2?style=flat)](#)
 
+<p align="center">
+  <strong>Microsoft Entra ID Cloud-Only Governance Lab</strong><br>
+  Automated Onboarding · Dynamic Membership · Administrative Units · PIM & JIT · Enterprise Apps · Access Reviews<br>
+  Portfolio Project for Cloud & IT Administrator
+</p>
 ---
 
 ## Executive Summary
@@ -32,39 +36,8 @@ phase cites the sources that support it.
 Cloud-only Microsoft Entra ID tenant (no on-premises sync — deliberately independent from the
 companion Active Directory lab):
 
-```text
-+--------------------------------------------------------------+
-|                    Microsoft Entra ID tenant                  |
-|                                                              |
-|  data/contractors.csv                                        |
-|        |                                                    |
-|        v                                                    |
-|  [Phase 1] Bulk onboarding (Graph PowerShell)                |
-|        |  20 users, temp passwords, forced reset             |
-|        v                                                    |
-|  [Phase 2] Dynamic groups: "Cyber Security Contractors",      |
-|            "IM Staff" (department / jobTitle rules)          |
-|        |                                                    |
-|        v                                                    |
-|  [Phase 3] "Contractors AU" administrative unit              |
-|            Helpdesk Administrator scoped to the AU           |
-|        |                                                    |
-|        v                                                    |
-|  [Phase 4] PIM: eligible assignments, JIT activation,        |
-|            custom "SOC Analyst" role                         |
-|        |                                                    |
-|        v                                                    |
-|  [Phase 5] Enterprise apps: assignment-required,             |
-|            hash-table cached bulk assignment, My Apps       |
-|        |                                                    |
-|        v                                                    |
-|  [Phase 6] Access reviews (groups + apps), My Access        |
-|        |                                                    |
-|        v                                                    |
-|  [Phase 7] Offboarding: disable -> revoke sessions ->       |
-|            strip assignments -> (optional) delete           |
-+--------------------------------------------------------------+
-```
+<img width="2752" height="1536" alt="Lab-Architecture" src="https://github.com/user-attachments/assets/1f438f3a-f058-4187-a901-47560bb02444" />
+
 
 **Scenario roles:** Marcus Reyes (IAM Engineer) is the PIM subject; helpdesk staff receive the
 AU-scoped role; SOC analysts receive the custom log-reader role; the remaining contractors stay
