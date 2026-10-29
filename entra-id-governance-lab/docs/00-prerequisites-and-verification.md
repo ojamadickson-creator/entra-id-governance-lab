@@ -85,7 +85,7 @@ Key behaviors to understand before running the phase scripts:
 
 Copy `data/contractors.sample.csv` to `data/contractors.csv` and edit it for your tenant. The
 file defines 20 identities with six columns:
-
+Also, you can use ```Generate-ContractorCsv-v2.ps1``` in the data folder to automate this step.
 | Column | Use |
 |---|---|
 | `FirstName`, `LastName` | Identity name and UPN construction (`first.last@domain`) |
