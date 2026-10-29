@@ -17,7 +17,7 @@ verification method used throughout this guide.
 
 Create a new Microsoft Entra tenant (or use an existing developer/test tenant) with a verified
 domain. This lab is deliberately **cloud-only**: no directory synchronization, no on-premises
-dependency. Placeholder values used throughout this guide:
+dependency.
 
 | Placeholder | Meaning |
 |---|---|
