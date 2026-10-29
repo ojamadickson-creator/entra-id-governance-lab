@@ -148,7 +148,7 @@ Update-MgUser -UserId $targetUpn -JobTitle 'Identity and Access Management Engin
 Write-Host "Restored JobTitle to 'Identity and Access Management Engineer'. Marcus will re-appear in 'IM Staff' shortly." -ForegroundColor Green
 ```
 
-Automated Test Script (Test-DynamicGroupEvaluation.ps1)
+### Automated Test Script (Test-DynamicGroupEvaluation.ps1)
 If you want a single script to test the removal, monitor the background rule engine, and restore the attribute automatically:
 ```powershell
 [CmdletBinding()]
