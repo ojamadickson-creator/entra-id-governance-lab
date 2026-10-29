@@ -103,7 +103,9 @@ instantaneously. Allow a few minutes, then:
 
 ```powershell
 $g = Get-MgGroup -Filter "displayName eq 'IM Staff'" -Top 1
-Get-MgGroupMember -GroupId $g.Id -All
+Get-MgGroupMember -GroupId $g.Id -All | ForEach-Object {
+    Get-MgUser -UserId $_.Id -Property "displayName,jobTitle,userPrincipalName"
+} | Select-Object DisplayName, JobTitle, UserPrincipalName | Format-Table -AutoSize
 ```
 
 Expected: the four IAM identities (Marcus Reyes, Aisha Khan, Luis Ferreira, Ines Machado).
