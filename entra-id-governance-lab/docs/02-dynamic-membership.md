@@ -44,12 +44,25 @@ Portal path: **Entra admin center > Groups > All groups > New group**, with
 Graph PowerShell equivalent (also in `scripts/02-New-DynamicGroups.ps1`):
 
 ```powershell
-New-MgGroup -DisplayName 'Cyber Security Contractors (Dynamic)' `
-    -MailEnabled:$false -MailNickname 'csc-dynamic' `
-    -SecurityEnabled `
-    -GroupTypes @('DynamicMembership') `
-    -MembershipRule 'user.department -eq "Cyber Security Contractors"' `
-    -MembershipRuleProcessingState 'On'
+$groupName = 'Cyber Security Contractors (Dynamic)'
+$rule      = '(user.department -eq "Cyber Security Contractors")'
+
+$existing = Get-MgGroup -Filter "displayName eq '$groupName'" -Top 1
+
+if (-not $existing) {
+    $dynGroup = New-MgGroup -DisplayName $groupName `
+        -Description 'Dynamic security group for cyber security contractors' `
+        -MailEnabled:$false `
+        -MailNickname 'csc-dynamic' `
+        -SecurityEnabled:$true `
+        -GroupTypes @('DynamicMembership') `
+        -MembershipRule $rule `
+        -MembershipRuleProcessingState 'On'
+
+    Write-Host "Created dynamic group: $($dynGroup.DisplayName) (Id: $($dynGroup.Id))" -ForegroundColor Green
+} else {
+    Write-Host "Dynamic group already exists: $($existing.DisplayName) (Id: $($existing.Id))" -ForegroundColor Yellow
+}
 ```
 
 Dynamic membership requires the `DynamicMembership` value in `groupTypes`, and the rule can be
