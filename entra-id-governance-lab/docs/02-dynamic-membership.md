@@ -118,7 +118,24 @@ Expected: the four IAM identities (Marcus Reyes, Aisha Khan, Luis Ferreira, Ines
   re-evaluates and the engine removes him from IM Staff.
 
 ```powershell
-Update-MgUser -UserId marcus.reyes@beginningdimension.com -JobTitle 'SOC Analyst'
+$targetUpn = 'marcus.reyes@beginningdimension.onmicrosoft.com'
+Update-MgUser -UserId $targetUpn -JobTitle 'SOC Analyst'
+Write-Host "Updated JobTitle to 'SOC Analyst' for $targetUpn. Waiting for dynamic rule re-evaluation..." -ForegroundColor Yellow
+```
+### Verify Removal (Allow 2–5 minutes)
+Check that Marcus is no longer a member of IM Staff
+```powershell
+$group = Get-MgGroup -Filter "displayName eq 'IM Staff'" -Top 1
+$isMember = @(Get-MgGroupMember -GroupId $group.Id -All | Where-Object {
+    $u = Get-MgUser -UserId $_.Id
+    $u.UserPrincipalName -eq $targetUpn
+}).Count -gt 0
+
+if (-not $isMember) {
+    Write-Host "SUCCESS: Marcus Reyes was removed from 'IM Staff' by dynamic evaluation!" -ForegroundColor Green
+} else {
+    Write-Host "PENDING: Marcus is still listed. Background evaluation has not finished yet." -ForegroundColor Gray
+}
 ```
 
 ### 5b. Restore the test attribute
@@ -127,7 +144,59 @@ After the removal test, restore Marcus's IAM job title so the dynamic group retu
 expected state for later phases:
 
 ```powershell
-Update-MgUser -UserId marcus.reyes@beginningdimension.com -JobTitle 'Identity and Access Management Engineer'
+Update-MgUser -UserId $targetUpn -JobTitle 'Identity and Access Management Engineer'
+Write-Host "Restored JobTitle to 'Identity and Access Management Engineer'. Marcus will re-appear in 'IM Staff' shortly." -ForegroundColor Green
+```
+
+Automated Test Script (Test-DynamicGroupEvaluation.ps1)
+If you want a single script to test the removal, monitor the background rule engine, and restore the attribute automatically:
+```powershell
+[CmdletBinding()]
+param(
+    [string]$TargetUpn = 'marcus.reyes@beginningdimension.onmicrosoft.com',
+    [string]$GroupName = 'IM Staff'
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+$group = Get-MgGroup -Filter "displayName eq '$GroupName'" -Top 1
+if (-not $group) {
+    throw "Dynamic group '$GroupName' not found."
+}
+
+# 1. Change title to trigger removal
+Write-Host "[1/3] Changing JobTitle to 'SOC Analyst' (triggering removal from $GroupName)..." -ForegroundColor Cyan
+Update-MgUser -UserId $TargetUpn -JobTitle 'SOC Analyst'
+
+Write-Host "Waiting for background rule evaluation..." -ForegroundColor Gray
+$removed = $false
+for ($i = 1; $i -le 10; $i++) {
+    Start-Sleep -Seconds 30
+    $memberCount = @(Get-MgGroupMember -GroupId $group.Id -All | Where-Object {
+        (Get-MgUser -UserId $_.Id).UserPrincipalName -eq $TargetUpn
+    }).Count
+
+    if ($memberCount -eq 0) {
+        Write-Host "  Confirmed: User successfully removed after $($i * 30) seconds." -ForegroundColor Green
+        $removed = $true
+        break
+    } else {
+        Write-Host "  Check $i: Still evaluating in Entra ID queue..." -ForegroundColor Gray
+    }
+}
+
+if (-not $removed) {
+    Write-Host "  Evaluation still queued; proceeding with attribute restoration." -ForegroundColor Yellow
+}
+
+# 2. Restore attribute
+Write-Host "[2/3] Restoring JobTitle to 'Identity and Access Management Engineer'..." -ForegroundColor Cyan
+Update-MgUser -UserId $TargetUpn -JobTitle 'Identity and Access Management Engineer'
+Write-Host "  Marcus Reyes attribute restored." -ForegroundColor Green
+
+# 3. Final summary
+Write-Host "[3/3] Dynamic membership test sequence complete." -ForegroundColor Cyan
 ```
 
 ### 6. Verify rule execution in audit logs
