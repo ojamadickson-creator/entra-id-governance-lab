@@ -48,7 +48,8 @@ have administrator roles** — password resets and similar sensitive actions aga
 administrators are restricted
 ([Assign Microsoft Entra roles — AU scope](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/custom-assign-powershell)).
 
-## Role Mapping & Governance Matrix (corrected scoping)
+## Role Mapping & Governance Matrix
+
 
 | Job role / specialty | Assigned Entra ID role | Scope | Least-privilege rationale |
 |---|---|---|---|
