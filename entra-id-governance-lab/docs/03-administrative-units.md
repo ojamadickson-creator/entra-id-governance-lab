@@ -120,7 +120,7 @@ Assign Security Reader to the SOC analysts and penetration testers at tenant sco
 AU-scoped. Security Operations Leads and Cloud Security Engineers receive their roles as
 **PIM-eligible assignments in Phase 4** rather than standing active assignments.
 
-Use Powershell to create and people Security Reader based on job title (SOC Analyst)
+Use Powershell to create and add people Security Reader based on job title (SOC Analyst)
 ````
 # 1. Connect to Microsoft Graph
 Connect-MgGraph -Scopes "RoleManagement.ReadWrite.Directory"
