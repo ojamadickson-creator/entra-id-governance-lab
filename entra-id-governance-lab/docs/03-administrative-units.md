@@ -67,9 +67,9 @@ Portal: **Entra admin center > Entra ID > Roles & admins > Admin units > Add adm
 unit** — name it `Contractors AU`.
 
 ```powershell
-$au = New-MgDirectoryAdministrativeUnit -DisplayName 'Contractors AU' `
-    -Description 'Administrative boundary for the cyber security contractor cohort'
-```
+Disconnect-MgGraph
+Connect-MgGraph -Scopes "AdministrativeUnit.ReadWrite.All", "Directory.ReadWrite.All"
+````
 
 ### 2. Populate the AU with the contractor users
 
@@ -77,7 +77,7 @@ Add the 20 users as AU members (portal: open the AU > **Users** > **Add**; or):
 
 ```powershell
 foreach ($member in (Get-MgGroupMember -GroupId $group.Id -All)) {
-    $odataId = "https://graph.microsoft.com/v1.0/users/$($member.Id)"
+    $odataId = "https://graph.microsoft.com/v1.0/directoryObjects/$($member.Id)"
     New-MgDirectoryAdministrativeUnitMemberByRef -AdministrativeUnitId $au.Id -OdataId $odataId
 }
 ```
