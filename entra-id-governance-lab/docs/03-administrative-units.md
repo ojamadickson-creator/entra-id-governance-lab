@@ -31,8 +31,7 @@ members of that unit, and never to tenant-wide settings. It is not an authorizat
 against tenant-level administrators — a Global Administrator still supersedes it. Adding a
 *group* to an AU does not make every group member an AU-managed user; membership is per-object.
 
-### Which roles support AU scope (correction to the source breakdown)
-
+### Which roles support AU scope 
 Only a defined list of built-in roles can be assigned with administrative unit scope —
 including **Helpdesk Administrator, User Administrator, Groups Administrator, License
 Administrator, Password Administrator, Authentication Administrator**, plus any custom role
