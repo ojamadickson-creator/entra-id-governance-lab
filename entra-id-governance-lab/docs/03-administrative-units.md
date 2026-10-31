@@ -120,6 +120,43 @@ Assign Security Reader to the SOC analysts and penetration testers at tenant sco
 AU-scoped. Security Operations Leads and Cloud Security Engineers receive their roles as
 **PIM-eligible assignments in Phase 4** rather than standing active assignments.
 
+Use Powershell to create and people Security Reader based on job title (SOC Analyst)
+````
+# 1. Connect to Microsoft Graph
+Connect-MgGraph -Scopes "RoleManagement.ReadWrite.Directory"
+
+# 2. Get the Security Reader Role Definition ID
+$role = Get-MgRoleManagementDirectoryRoleDefinition -Filter "displayName eq 'Security Reader'"
+
+# 3. Path to your downloaded CSV file
+$csvPath = "C:\Users\Ojama\Downloads\users_10_31_2026 11_33_41 PM.csv"
+
+# 4. Verify CSV file exists before proceeding
+if (-Not (Test-Path $csvPath)) {
+    Write-Error "CSV file not found at path: $csvPath"
+    exit
+}
+
+$csvData = Import-Csv -Path $csvPath
+
+# 5. Filter users by Title (SOC Analysts and Penetration Testers)
+$targetTitles = @("SOC Analyst", "Tier 1 SOC Analyst", "Penetration Tester")
+$targetUsers = $csvData | Where-Object { $_.'Title' -in $targetTitles }
+
+# 6. Loop through matched users and assign the role at tenant scope ("/")
+foreach ($row in $targetUsers) {
+    try {
+        New-MgRoleManagementDirectoryRoleAssignment `
+            -RoleDefinitionId $role.Id `
+            -PrincipalId $row.'Object Id' `
+            -DirectoryScopeId "/"
+
+        Write-Host "Successfully assigned Security Reader to: $($row.'Display name') ($($row.'User principal name'))" -ForegroundColor Green
+    } catch {
+        Write-Host "Failed to assign role to $($row.'Display name'): $_" -ForegroundColor Yellow
+    }
+}
+````
 ### 5. Validate with positive and negative tests
 
 - **Positive:** sign in as Rita Marques (helpdesk) — she can reset the password of a
