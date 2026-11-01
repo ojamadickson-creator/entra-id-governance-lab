@@ -21,7 +21,7 @@ decision helpers, completion and application of results.
   ([What are access reviews?](https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview)).
 - Reviewers must be active users with email addresses.
 
-## Critical Limitation (correction to the source breakdown)
+## Critical Limitation 
 
 **Access review decisions do not change membership in dynamic groups.** Dynamic groups are
 rule-driven, so denied users remain members as long as they match the rule
