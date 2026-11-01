@@ -32,7 +32,7 @@ Both types can be permanent or time-bound (start/end dates), and both can be ext
 renewed near expiry
 ([Plan a PIM deployment](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan)).
 
-Two accuracy notes that correct the source breakdown:
+Two accuracy notes:
 
 - **Eligibility is not the absence of privileges.** An eligible assignment grants no *active*
   permissions from that assignment, but the user may hold other privileges — check the whole
