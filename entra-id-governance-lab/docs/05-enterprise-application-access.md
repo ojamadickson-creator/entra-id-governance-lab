@@ -100,7 +100,7 @@ New-MgUserAppRoleAssignment -UserId $userCache['sofia.santos@beginningdimension.
 ```
 
 The complete implementation (with skip/failure handling and summaries) is in
-`scripts/05-Assign-UsersToApp.ps1`:
+`scripts/05-Assign-UsersToApp.ps1`: Also, you run the script in folder directly but make sure to use the correct parameter as the one in that script is for my lab.
 
 ```powershell
 .\scripts\05-Assign-UsersToApp.ps1 -TenantId $TenantId `
