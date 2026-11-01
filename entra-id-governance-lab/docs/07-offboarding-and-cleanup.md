@@ -42,7 +42,7 @@ The offboarding script (`scripts/07-Offboard-User.ps1`) is **partial automation*
 steps 1, 2, 3, and 3b, prints a notice for step 4, and only deletes the account when you
 opt in with `-DeleteUser`. Role cleanup is deliberately not automated (see step 3 below).
 
-Two accuracy notes that correct the source breakdown:
+Two accuracy notes
 
 - **`Revoke-MgUserSignInSession` is not an instant global sign-out.** It invalidates all
   refresh tokens issued to applications and browser session cookies by resetting
