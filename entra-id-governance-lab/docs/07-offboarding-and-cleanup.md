@@ -24,8 +24,7 @@ cleanup.
   `AppRoleAssignment.ReadWrite.All`, and `Group.ReadWrite.All` for the parent-group
   membership removal.
 
-## The Documented Sequence (correction to the source breakdown)
-
+## The Documented Sequence 
 Microsoft's emergency access-revocation guidance disables the account and revokes sessions
 **early** — before finishing entitlement removal — so that new authentication is blocked while
 cleanup proceeds ([Revoke user access in an emergency](https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access)):
