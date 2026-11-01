@@ -122,7 +122,7 @@ permission strings:
    - `microsoft.directory/auditLogs/allProperties/read` — inspect system audit telemetry
    - `microsoft.directory/signInReports/allProperties/read` — inspect sign-in activity and risk reports
 
-> **Correction to the source breakdown:** the valid custom-role permission string is
+>  valid custom-role permission string is
 > `microsoft.directory/signInReports/allProperties/read` — not `signInLogs`. The custom-role
 > permission lists publish `auditLogs` and `signInReports` (see the
 > [enterprise app permissions for custom roles](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/custom-enterprise-app-permissions));
