@@ -63,7 +63,7 @@ then **Overview > Revoke sessions**.
 PowerShell (Microsoft's documented order):
 
 ```powershell
-$User = Get-MgUser -Filter "userPrincipalName eq 'nadia.faro@beginningdimension.com'"
+$User = Get-MgUser -Filter "userPrincipalName eq 'aisha.khan@beginningdimension.onmicrosoft.com'"
 Update-MgUser -UserId $User.Id -AccountEnabled:$false
 
 Import-Module Microsoft.Graph.Users.Actions
