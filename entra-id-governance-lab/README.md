@@ -119,39 +119,6 @@ Supporting documents: [Troubleshooting](docs/troubleshooting.md) ·
 
 
 
-## Script Quality Assurance
-
-All five scripts are syntax-checked with the PowerShell AST parser and exercised by a
-**no-tenant mock test suite** (`tests/Test-Scripts.WithMocks.ps1`, 47 assertions) that runs
-them against in-memory mocks of the Graph cmdlets. The suite checks selected control-flow
-paths — it is NOT a substitute for executing the lab in a tenant, and the mocks do not
-validate actual SDK parameter schemas or tenant authorization. What it does verify:
-dynamic-group rules and processing state; forced password change and 16-character
-generation on every created profile; idempotent re-runs; membership repair on re-run;
-exact-UPN privileged assignment that **fails the run** on missing or ambiguous names;
-app-assignment duplicate/missing/ambiguity handling; declared-role enforcement (the
-all-zeros default is rejected whenever the app declares any roles — enabled, disabled, or
-application-only); the documented offboarding order (disable first, revoke sessions early,
-app removal next); that the offboarding script is honest partial automation — it touches
-**no** role assignments and submits **no** PIM requests (role cleanup is a mandatory manual
-portal step, and the run prints that notice); group-membership removal that actually mutates
-the membership store and survives a repeat run; and `-WhatIf` mutation suppression. Run it with:
-
-```powershell
-pwsh -NoProfile -File tests/Test-Scripts.WithMocks.ps1
-```
-
-The suite exits 0 only when every assertion passes, so it works as a CI gate: run it on every
-commit alongside your own tenant execution evidence.
-
-## Safety & Sanitization Notice
-
-- Run this lab only in a **dedicated trial tenant** — never a production directory.
-- No passwords, temporary credentials, tokens, or real tenant IDs belong in scripts, logs, or
-  published screenshots. The sample scripts deliberately exclude secrets from their reports.
-- Replace all placeholder values (`$TenantId`, domains, UPNs) with your own lab values.
-
----
 
 Full reference list and the procedure-by-procedure verification ledger:
 [References](docs/references.md).
